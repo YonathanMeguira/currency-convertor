@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { HistoryComponent } from './views/history/history.component';
 import { ConvertComponent } from './views/convert/convert.component';
 

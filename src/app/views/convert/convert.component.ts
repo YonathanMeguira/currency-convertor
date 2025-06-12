@@ -1,6 +1,6 @@
 import { Component, inject, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Currencies, CurrencySwitchOperation } from '../../models/currency.model';
+import { Currencies, CurrencySwitchOperation } from '../../models/currency';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from "@angular/material/form-field"
 import { MatOptionModule } from '@angular/material/core';
@@ -37,8 +37,8 @@ export class ConvertComponent implements OnDestroy {
 
   form = new FormGroup({
     amount: new FormControl('', [Validators.required, Validators.min(0)]),
-    from: new FormControl(Currencies.USD, [Validators.required]),
-    to: new FormControl(Currencies.ILS, [Validators.required]),
+    from: new FormControl(Currencies[0].symbol, [Validators.required]),
+    to: new FormControl(Currencies[1].symbol, [Validators.required]),
   });
 
   convert() {
@@ -49,8 +49,8 @@ export class ConvertComponent implements OnDestroy {
 
     this.isLoading = true;
     const operation: CurrencySwitchOperation = {
-      from: this.form.value.from as Currencies,
-      to: this.form.value.to as Currencies,
+      from: this.form.value.from!,
+      to: this.form.value.to!,
       amount: Number(this.form.value.amount),
     };
 
