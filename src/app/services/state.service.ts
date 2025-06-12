@@ -26,10 +26,4 @@ export class StateService {
         });
     }
 
-    removeFromHistory(operation: CurrencySwitchOperation) {
-        this.state.next({
-            history: this.state.value.history.filter((o) => o.date !== operation.date)
-        });
-    }
-
 }

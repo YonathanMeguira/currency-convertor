@@ -14,10 +14,18 @@ export class CurrencyService {
     private http = inject(HttpClient);
 
     convert({ from, to, amount }: CurrencySwitchOperation) {
+
+        const getResult = (query: CurrencyResponse) => query.rates[to] * amount;
+
         return this.http.get<CurrencyResponse>(`https://api.frankfurter.dev/v1/latest?base=${from}&symbols=${to}`)
             .pipe(
-                tap((_) => this.state.addToHistory({ from, to, amount, date: Date.now() })),
-                map((response) => response.rates[to] * amount)
+                tap((response) => this.state.addToHistory({
+                    from, to,
+                    amount,
+                    date: Date.now(),
+                    result: getResult(response)
+                })),
+                map((response) => getResult(response))
             );
     }
 

@@ -3,6 +3,7 @@ export type CurrencySwitchOperation = {
   to: string;
   amount: number;
   date?: number;
+  result?: number;
 }
 
 export const Currencies = [

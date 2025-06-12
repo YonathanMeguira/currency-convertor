@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import {MatToolbarModule} from "@angular/material/toolbar";
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { StateService } from './services/state.service';
+import { map, Observable } from 'rxjs';
+import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, MatToolbarModule],   
+  imports: [RouterOutlet, CommonModule, RouterLink],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'currency-convertor';
+  private state = inject(StateService);
+  history$: Observable<number> = this.state.getHistory().pipe(map((history) => history.length));
 }
