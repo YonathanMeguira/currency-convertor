@@ -56,3 +56,21 @@ mat-icon {
     height: 2rem;
   }
 }
+
+.history-container {
+  padding: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.chart-container {
+  position: relative;
+  height: 400px;
+  width: 100%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-top: 20px;
+}

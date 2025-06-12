@@ -11,13 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
     CommonModule,
     MatIconModule
   ],
+  standalone: true,
   templateUrl: './history.component.html',
   styleUrl: './history.component.scss'
 })
 export class HistoryComponent {
-
   private state = inject(StateService);
   history$: Observable<CurrencySwitchOperation[]> = this.state.getHistory();
-
-
 }

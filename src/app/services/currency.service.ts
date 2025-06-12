@@ -29,4 +29,29 @@ export class CurrencyService {
             );
     }
 
+    getHistoryForPeriod(numOfDays: number, from: string, to: string) {
+        const startDate = this.formatDate(numOfDays);
+        const endDate = this.formatDate(0);
+        const url = `https://api.frankfurter.dev/v1/${startDate}..${endDate}`;
+
+        return this.http.get<{ rates: any[] }>(url)
+            .pipe(
+                tap(response => console.log(response)),
+                map((response) => {
+                    return Object.entries(response.rates).map(([date, rates]) => ({
+                        date,
+                        rates: [rates[from], rates[to]]
+                    }));
+                })
+            );
+    }
+
+    private formatDate(numberOfDays: number): string {
+        const date = new Date();
+        date.setDate(date.getDate() - numberOfDays);
+        return date.toISOString().split('T')[0];
+    }
+
+
+
 }
